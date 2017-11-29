@@ -24,9 +24,7 @@ Route::group(['domain' => '{domain}'], function() {
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 
 Route::get('login/{service}', 'Auth\LoginController@redirectToProvider');
@@ -34,4 +32,5 @@ Route::get('login/{service}/callback', 'Auth\LoginController@handleProviderCallb
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/manage', 'HomeController@index')->name('manage');
+Route::get('/', 'HomeController@index')->name('home');
