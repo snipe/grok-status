@@ -20,6 +20,7 @@ class CreateIncidentsTable extends Migration
             $table->string('severity')->nullable()->default(null);
             $table->string('incident_type');
             $table->integer('servicegroup_id')->nullable()->default(null);
+            $table->boolean('active')->default(1);
             $table->integer('account_id');
             $table->timestamps();
         });
