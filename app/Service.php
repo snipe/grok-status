@@ -2,12 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Scopes\MultiTenantScope;
 use App\Scopes\ActiveScope;
+use App\Scopes\MultiTenantScope;
+use Illuminate\Database\Eloquent\Model;
 
-class Incident extends Model
+class Service extends Model
 {
+
     /**
      * The "booting" method of the model.
      *
@@ -18,14 +19,7 @@ class Incident extends Model
         parent::boot();
 
         static::addGlobalScope(new MultiTenantScope);
-        static::addGlobalScope(new ActiveScope);
+        static::addGlobalScope(new ActiveScope());
     }
-
-
-    public function account()
-    {
-        return $this->belongsTo('\App\Account', 'account_id');
-    }
-
 
 }
