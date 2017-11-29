@@ -63,12 +63,6 @@ class SubdomainMiddleware
 
         $app_subdomain = extract_subdomains($parsed_app_url['host']);
         $request_subdomain = extract_subdomains($parsed_request_url['host']);
-        
-        // Check for custom CNAME domain
-        if ($request_subdomain =='') {
-            \Log::debug('NO subdomain passed.');
-            return $next($request);
-        }
 
         // Check for regular subdomain
         if ($app_domain != $request_domain) {
@@ -81,7 +75,9 @@ class SubdomainMiddleware
 
 
         if (isset($account)) {
-            view()->share('account', $account);
+            session(['account_id' => $account->id]);
+            $request->current_account = $account;
+            view()->share('current_account', $account);
             return $next($request);
         }
 
